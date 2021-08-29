@@ -1,0 +1,164 @@
+.form
+  @media (min-width: 425px)
+    display: flex
+    flex-wrap: wrap
+    > div
+      width: 50%
+  &__group
+    margin-bottom: 1rem
+    &__errors
+      color: var(--color-red-500)
+      list-style: none
+      padding: 0
+      margin: .25em 0 0
+  &__label
+    cursor: pointer
+    display: inline-block
+    margin-bottom: 0.25rem
+  &__input
+    align-items: center
+    background-color: var(--color-input-background)
+    border: 1px solid var(--color-input-border)
+    border-radius: var(--border-radius-input)
+    color: var(--color-input-text)
+    display: block
+    height: var(--height-input)
+    outline: none
+    padding: var(--padding-input)
+    width: 100%
+    &:focus,
+    &--is-focused
+      border-color: var(--color-input-border-focus)
+    &::placeholder
+      color: var(--color-input-placeholder)
+    &--pill
+      --border-radius-input: 999px
+    &__select
+      position: relative
+      user-select: none
+      &__options
+        // --border-radius-input: 1.5rem
+        --color-input-border: var(--color-gray-500)
+        --translate-y: -10%
+        background-color: var(--color-input-background)
+        border: 1px solid var(--color-input-border)
+        border-radius: var(--border-radius-input)
+        box-shadow: 0 .5rem 1rem rgba(#000, .05)
+        left: 0
+        list-style: none
+        margin: .25rem -1px 0
+        opacity: 0
+        overflow: hidden
+        padding: 0
+        position: absolute
+        top: 100%
+        transform: translateY(var(--translate-y))
+        transition: var(--transition-duration)
+        visibility: hidden
+        width: calc(100% + 2px)
+        z-index: var(--z-index-input-options)
+        .form__input--pill &
+          --border-radius-input: 1.5rem
+        > li
+          position: relative
+          > span
+            --color-input-select-options-background: transparent
+            --color-input-select-options-text: inherit
+            align-items: center
+            background: var(--color-input-select-options-background)
+            color: var(--color-input-select-options-text)
+            cursor: pointer
+            display: flex
+            height: var(--height-input)
+            padding: 0.5rem 1.75rem
+            text-decoration: none
+            width: 100%
+            &:hover
+              --color-input-select-options-background: var(--color-gray-300)
+          &.selected
+            > span
+              --color-input-select-options-background: var(--color-blue-300)
+              --color-input-select-options-text: var(--color-blue-700)
+      > label
+        align-items: center
+        cursor: pointer
+        display: flex
+        height: 100%
+        left: 0
+        padding: var(--padding-input)
+        position: absolute
+        top: 0
+        width: 100%
+        > span
+          color: var(--color-input-placeholder)
+          position: relative
+          width: 100%
+          &::after
+            border: 2px solid var(--color-input-placeholder)
+            border-right: none
+            border-top: none
+            content: ''
+            display: block
+            height: 0.75rem
+            position: absolute
+            right: 0
+            top: 50%
+            transform: translateY(-75%) rotate(-45deg) 
+            transition: var(--transition-duration)
+            width: 0.75rem
+        > input
+          opacity: 0
+          pointer-events: none
+          position: absolute
+      &--is-open
+        > label
+          > span
+            &::after
+              transform: translateY(-25%) rotate(135deg) 
+        .form__input__select__options
+          --translate-y: 0
+          opacity: 1
+          visibility: visible
+      &--has-value
+        > label
+          > span
+            color: var(--color-input-text)
+    &__checkbox
+      cursor: pointer
+      position: relative
+      user-select: none
+      z-index: 0
+      > span
+        align-items: center
+        display: inline-flex
+        gap: 1rem
+        > span
+          display: inline-block
+          &:first-child
+            background-color: var(--color-input-background)
+            border: 1px solid var(--color-input-border)
+            border-radius: var(--border-radius-input)
+            height: 1.5rem
+            transition: var(--transition-duration)
+            width: 1.5rem
+            > span
+              border: 2px solid var(--color-white)
+              border-right: none
+              border-top: none
+              display: block
+              height: 0.45rem
+              transform: translate(0.3rem, 0.35rem) rotate(-45deg)
+              width: 0.75rem
+      > input
+        opacity: 0
+        position: absolute
+        pointer-events: none
+        &:checked
+          + span
+            > span
+              &:first-child
+                background-color: var(--color-blue-500)
+                border-color: var(--color-blue-500)
+                // box-shadow: 0 0 2px 1px var(--color-blue-500), inset 0 0 0 2px var(--color-white)
+                > span
+                  opacity: 1

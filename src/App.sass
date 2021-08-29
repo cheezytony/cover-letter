@@ -1,0 +1,44 @@
+:root
+  --color-blue-300: rgb(211, 232, 255)
+  --color-blue-500: rgb(0 123 255)
+  --color-blue-700: rgb(0, 55, 113)
+  --color-gray-300: rgb(245, 245, 245)
+  --color-gray-500: rgb(231, 231, 231)
+  --color-gray-700: rgb(209, 206, 206)
+  --color-red-500: #e30
+  --color-white: #ffffff
+
+  // INPUT
+  --border-radius-input: 0.5rem
+  --color-input-background: var(--color-white)
+  --color-input-border: var(--color-gray-700)
+  --color-input-border-focus: var(--color-blue-500)
+  --color-input-text: inherit
+  --color-input-placeholder: var(--color-gray-700)
+  --height-input: 50px
+  --padding-input: 0 2rem
+  --z-index-input-options: 10
+
+  --transition-duration: 100ms
+
+.app
+  min-height: 100vh
+  @media screen and (min-width: 768px)
+    background: var(--color-gray-500)
+    padding: 2rem 0
+  &__container
+    background: var(--color-white)
+    border-radius: .5rem
+    max-width: 1040px
+    margin: auto
+    padding: 5rem 1rem
+    @media (min-width: 768px)
+      padding: 5rem
+
+.app__header
+  margin-bottom: 3rem
+  @media (min-width: 768px)
+    align-items: flex-start
+    display: flex
+    justify-content: space-between
+
