@@ -19,18 +19,14 @@ export default function Edit() {
   const history = useHistory();
 
   const [form, updateForm] = useState(createForm({
-    position: {
-      value: '',
-    },
-    companyName: {
-      value: '',
-    },
-    recipientType: {
-      value: '',
-    },
-    recipient: {
-      value: '',
-    },
+    position: { value: '' },
+    companyName: { value: '' },
+    recipientType: { value: '' },
+    recipient: { value: '' },
+    currentPosition: { value: '' },
+    currentEmployer: { value: '' },
+    referrer: { value: '', rules: ['nullable'] },
+    referrerType: { value: '', rules: ['nullable'] },
     shouldSave: {
       rules: ['nullable'],
       value: false,
@@ -47,6 +43,14 @@ export default function Edit() {
     title: 'Hiring Manager', value: 'Hiring Manager',
   }, {
     title: 'Hiring Manager\'s Name', value: 'name',
+  }];
+
+  const referrerOptions: InputSelectOption[] = [{
+    title: 'Select Option', value: '',
+  }, {
+    title: 'Job Listing', value: 'Job Listing',
+  }, {
+    title: 'Recruiter', value: 'Recruiter',
   }];
 
   const submitData = (event: React.FormEvent<HTMLFormElement>) => {
@@ -76,6 +80,10 @@ export default function Edit() {
       companyName: { value: coverLetter.companyName },
       recipientType: { value: coverLetter.recipientType },
       recipient: { value: coverLetter.recipient },
+      currentPosition: { value: coverLetter.currentPosition },
+      currentEmployer: { value: coverLetter.currentEmployer },
+      referrer: { value: coverLetter.referrer },
+      referrerType: { value: coverLetter.referrerType },
       shouldSave: { value: coverLetter.shouldSave },
     }));
   }, [coverLetter]);
@@ -88,7 +96,7 @@ export default function Edit() {
         <Form name="editForm" onSubmit={submitData}>
           <div>
             <FormGroup field={form.fields.position}>
-              <FormLabel htmlFor="position">Position</FormLabel>
+              <FormLabel htmlFor="position">Target Position</FormLabel>
               <Input
                 id="position"
                 placeholder="e.g. Senior Backend Developer"
@@ -97,7 +105,7 @@ export default function Edit() {
               />
             </FormGroup>
             <FormGroup field={form.fields.companyName}>
-              <FormLabel htmlFor="companyName">Company Name</FormLabel>
+              <FormLabel htmlFor="companyName">Target Company</FormLabel>
               <Input
                 id="companyName"
                 placeholder="e.g. CredPal"
@@ -105,6 +113,26 @@ export default function Edit() {
                 onChange={(event) => updateForm(updateField(form, 'companyName', event.target.value))}
               />
             </FormGroup>
+
+            <FormGroup field={form.fields.currentEmployer}>
+              <FormLabel htmlFor="currentEmployer">Current Company</FormLabel>
+              <Input
+                id="currentEmployer"
+                placeholder="e.g. CredPal"
+                value={form.fields.currentEmployer.value as string}
+                onChange={(event) => updateForm(updateField(form, 'currentEmployer', event.target.value))}
+              />
+            </FormGroup>
+            <FormGroup field={form.fields.currentPosition}>
+              <FormLabel htmlFor="currentPosition">Current Position</FormLabel>
+              <Input
+                id="currentPosition"
+                placeholder="e.g. Full Stack Developer"
+                value={form.fields.currentPosition.value as string}
+                onChange={(event) => updateForm(updateField(form, 'currentPosition', event.target.value))}
+              />
+            </FormGroup>
+
             <FormGroup field={form.fields.recipientType}>
               <FormLabel htmlFor="recipientType">Recipient</FormLabel>
               <InputSelect
@@ -134,6 +162,30 @@ export default function Edit() {
                 </FormGroup>
               )
             }
+
+            <FormGroup field={form.fields.referrerType}>
+              <FormLabel htmlFor="referrerType">Referrer Type</FormLabel>
+              <InputSelect
+                id="referrerType"
+                name="recipient"
+                options={referrerOptions}
+                placeholder="e.g. Job Listing"
+                value={form.fields.referrerType.value}
+                onChange={(value) => {
+                  updateForm(updateField(form, 'referrerType', value));
+                }}
+              />
+            </FormGroup>
+            <FormGroup field={form.fields.referrer}>
+              <FormLabel htmlFor="referrer">Referrer</FormLabel>
+              <Input
+                id="referrer"
+                placeholder="e.g. RemoteOk.io"
+                value={form.fields.referrer.value as string}
+                onChange={(event) => updateForm(updateField(form, 'referrer', event.target.value))}
+              />
+            </FormGroup>
+
             <FormGroup>
               <InputCheckbox
                 checked={form.fields.shouldSave.value as boolean}

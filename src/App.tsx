@@ -11,7 +11,9 @@ function App() {
   const dispatch = useDispatch();
   const data = getItem<CoverLetter>('cover-letter-data');
 
-  dispatch(updateCoverLetter(data));
+  if (data && data.companyName && data.position) {
+    dispatch(updateCoverLetter(data));
+  }
 
   return (
     <div className="app">
